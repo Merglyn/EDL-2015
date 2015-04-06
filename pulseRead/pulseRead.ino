@@ -1,4 +1,18 @@
-#define PIN 6
+const int pulsePin = 5;
+
+// define pins
+const int pinON = 6;
+const int pinCC_Right = 8;
+const int pinCW_Right = 9;
+const int pinSpeed_Right = 7;
+const int pinCW_Left = 10;
+const int pinCC_Left = 11;
+const int pinSpeed_Left = 12;
+
+// define vars
+volatile unsigned int enc_left = 0;
+volatile unsigned int enc_right = 0;
+
 
 //define some useful vars
 unsigned long tmp_pulse = 0;
