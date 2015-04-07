@@ -12,9 +12,10 @@ const int pinCC_Left = 11;
 const int pinSpeed_Left = 12;
 
 // define vars
-volatile unsigned int enc_left = 0;
-volatile unsigned int enc_right = 0;
+volatile int enc_left = 0;
+volatile int enc_right = 0;
 volatile unsigned long cur_pulse = 0;
+volatile unsigned long tmp_pulse = 0;
 
 void setup() {
   //set pinmodes
@@ -49,7 +50,7 @@ void loop() {
   //read the pulse width into the var we set before
   Serial.println("Reading pulse width");
   readPulse();
-  Serial.println(cur_pulse)
+  Serial.println(cur_pulse);
 
   //check pulse width and execute
   if (cur_pulse < 25000L){
@@ -79,8 +80,10 @@ void readPulse(){
   //simply reads the pulse until it gets
   // one of reasonable length (<14ms, our bottom line)
   cur_pulse = 0;
-  while(cur_pulse < 14000){
-      cur_pulse = pulseIn(pulsePin, HIGH);
+  tmp_pulse = 0;
+  while(tmp_pulse < 14000){
+      tmp_pulse = pulseIn(pulsePin, HIGH);
+      cur_pulse = cur_pulse + tmp_pulse
   }
   return;
 }
